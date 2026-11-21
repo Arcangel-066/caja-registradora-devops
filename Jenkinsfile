@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                git 'https://github.com/TU_USUARIO/caja-registradora-devops.git'
+                git 'https://github.com/Arcangel-066/caja-registradora-devops.git'
             }
         }
 
