@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Registrar venta{% endblock %}
+{% block content %}
+<h1 class="mb-4">Registrar venta</h1>
+
+{% if not productos %}
+<p class="text-muted">No hay productos disponibles. Agrega productos antes de registrar una venta.</p>
+{% else %}
+<form method="post" action="{{ url_for('registrar_venta') }}">
+    <table class="table" id="tabla-venta">
+        <thead>
+            <tr><th>Producto</th><th style="width: 140px;">Cantidad</th><th></th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select name="producto_id" class="form-select" required>
+                        <option value="">-- Selecciona --</option>
+                        {% for p in productos %}
+                        <option value="{{ p.id }}">{{ p.nombre }} (${{ "%.2f"|format(p.precio) }} — stock: {{ p.stock }})</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td><input type="number" name="cantidad" min="1" class="form-control" value="1" required></td>
+                <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="eliminarFila(this)">✕</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-outline-secondary mb-3" onclick="agregarFila()">+ Agregar producto</button>
+    <br>
+    <button type="submit" class="btn btn-success">Confirmar venta</button>
+</form>
+
+<template id="fila-plantilla">
+    <tr>
+        <td>
+            <select name="producto_id" class="form-select" required>
+                <option value="">-- Selecciona --</option>
+                {% for p in productos %}
+                <option value="{{ p.id }}">{{ p.nombre }} (${{ "%.2f"|format(p.precio) }} — stock: {{ p.stock }})</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td><input type="number" name="cantidad" min="1" class="form-control" value="1" required></td>
+        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="eliminarFila(this)">✕</button></td>
+    </tr>
+</template>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Historial de ventas{% endblock %}
+{% block content %}
+<h1 class="mb-4">Historial de ventas</h1>
+
+{% for item in historial %}
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Venta #{{ item.venta.id }} — {{ item.venta.fecha }}</span>
+        <strong>${{ "%.2f"|format(item.venta.total) }}</strong>
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for d in item.detalles %}
+        <li class="list-group-item d-flex justify-content-between">
+            <span>{{ d.nombre }} x {{ d.cantidad }}</span>
+            <span>${{ "%.2f"|format(d.subtotal) }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<p class="text-muted">No hay ventas registradas todavía.</p>
+{% endfor %}
+{% endblock %}

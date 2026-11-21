@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Panel principal{% endblock %}
+{% block content %}
+<h1 class="mb-4">Panel principal</h1>
+<div class="row g-3">
+    <div class="col-md-3">
+        <div class="card text-center p-3 h-100">
+            <h6 class="text-muted">Ventas de hoy</h6>
+            <p class="fs-4 mb-0">${{ "%.2f"|format(total_ventas_hoy) }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3 h-100">
+            <h6 class="text-muted">Productos disponibles</h6>
+            <p class="fs-4 mb-0">{{ cantidad_productos }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3 h-100">
+            <h6 class="text-muted">Última venta</h6>
+            {% if ultima_venta %}
+                <p class="fs-6 mb-0">#{{ ultima_venta.id }} — ${{ "%.2f"|format(ultima_venta.total) }}</p>
+                <small class="text-muted">{{ ultima_venta.fecha }}</small>
+            {% else %}
+                <p class="text-muted mb-0">Sin ventas aún</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3 h-100">
+            <h6 class="text-muted">Ingresos acumulados</h6>
+            <p class="fs-4 mb-0">${{ "%.2f"|format(ingresos_acumulados) }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
