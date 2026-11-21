@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                git 'https://github.com/Arcangel-066/caja-registradora-devops.git'
-            }
+git branch: 'main', url: 'https://github.com/Arcangel-066/caja-registradora-devops.git'            
+}
         }
 
         stage('Construir imagen Docker') {
